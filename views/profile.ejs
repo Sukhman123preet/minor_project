@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333f4b; /* Light grayish-blue background */
+            color: #2c3e50; /* Dark slate for primary text */
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 65% 35%;
+            gap: 10px;
+            padding: 20px;
+        }
+        .item {
+            height: 18rem;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            background-color: #ffffff; /* White background for clarity */
+            font-size: 1.2rem;
+        }
+        .item:nth-child(2),
+        .item:nth-child(4) {
+            color: #ffffff;
+            background-color: #098d8f; /* Light gray for contrast */
+        }
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 10px;
+            font-size: 1rem;
+            background-color: #c1c4c6; /* Medium blue for headings */
+            color: #ffffff; /* White text */
+            border-radius: 5px;
+            box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+        .heading img {
+            height: 20px;
+        }
+        #item_1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 15px;
+        }
+        .child {
+            background-color: #203662; /* Medium blue for highlights */
+            height: 60%;
+            width: 25%;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-weight: bold;
+            color: #ecf0f1; /* Light gray text */
+        }
+        .description {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #000000; /* Muted gray for additional info */
+        }
+        @media (max-width: 500px) {
+            .container {
+                grid-template-columns: 1fr; /* Stacks items vertically */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Educator's Basic Information -->
+        <div class="item" id="item_1">
+            <div class="child">
+                <div class="heading">
+                    <span>Total exams created</span>
+                    <img src="paper.png" alt="Exam icon">
+                </div>
+                <span>15 Exams</span> 
+                <div class="description">Across 3 courses</div>
+            </div>
+            <div class="child">
+                <div class="heading">
+                    <span>Specialty:</span>
+                </div>
+                <span>Chemistry</span>
+                <div class="description">Organic & Inorganic</div>
+            </div>
+            <div class="child">
+                <div class="heading">
+                    <span>Background:</span>
+                    <img src="sheet_icon.svg" alt="Background icon">
+                </div>
+                <span>Ph.D. in Chemistry</span>
+                <div class="description">20+ Years of Experience</div>
+            </div>
+        </div>
+
+        <!-- Exams Created -->
+        <div class="item">
+            <div class="heading">
+                <span>Exams Created:</span>
+                <img src="sheet_icon.svg" alt="Exams icon">
+            </div>
+            <ul>
+                <li>Organic Chemistry Midterm - 50 Questions</li>
+                <li>Inorganic Chemistry Final - 75 Questions</li>
+                <li>General Chemistry Quiz - 30 Questions</li>
+            </ul>
+        </div>
+
+        <!-- Students Attempted -->
+        <div class="item">
+            <div class="heading">
+                <span>Students Attempted:</span>
+                <img src="students_icon.svg" alt="Students icon">
+            </div>
+            <ul>
+                <li>Organic Chemistry Midterm - 120 Students</li>
+                <li>Inorganic Chemistry Final - 100 Students</li>
+                <li>General Chemistry Quiz - 150 Students</li>
+            </ul>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="item">
+            <div class="heading">
+                <span>Additional Info:</span>
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non urna eros. Curabitur elementum, lorem a pharetra vestibulum, est lectus gravida augue.</p>
+        </div>
+    </div>
+</body>
+</html>
