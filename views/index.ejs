@@ -16,52 +16,55 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background-color: #f0f2f5;
-            color: #444;
+            background-color: #e0f7fa; /* Light cyan background */
+            color: #333;
         }
         .container {
             position: relative; 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff69;
-            backdrop-filter: blur(5px);
-            border-radius: 10px;
-            padding: 40px 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(6px);
+            border-radius: 12px;
+            padding: 40px 30px;
             text-align: center;
-            max-width: 600px;
+            max-width: 700px;
             z-index: 1; 
         }
         .container h1 {
-            font-size: 2.2em;
+            font-size: 2.5em;
             margin-bottom: 20px;
-            color: #222;
+            color: #00796b; /* Teal color */
+            font-weight: 600;
         }
 
         .container p {
-            font-size: 1.1em;
+            font-size: 1.2em;
             margin-bottom: 30px;
-            color: #1a1a1a;
+            color: #555;
         }
 
         .buttons {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
+            flex-wrap: wrap; /* Ensures responsiveness */
         }
 
         .button {
-            background-color: #08a87d;
+            background-color: #00796b; /* Teal color */
             color: #fff;
-            padding: 12px 25px;
+            padding: 14px 30px;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 1em;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         .button:hover {
-            background-color: #067b5f;
-            transform: translateY(-3px);
+            background-color: #004d40; /* Darker teal color */
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
 
         .background-image {
@@ -71,7 +74,7 @@
             width: 100%;
             height: 100%;
             z-index: -1; 
-            filter: brightness(80%);
+            filter: brightness(75%);
         }
     </style>
 </head>
