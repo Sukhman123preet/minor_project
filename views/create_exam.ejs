@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Exam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2c3e50; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .form-container {
+            background-color: #10121a; /* Darker background for form container */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #3b4e63; /* Subtle border color */
+            border-radius: 5px;
+            background-color: #2c3e50; /* Dark input background */
+            color: #e0e0e0; /* Light text color in inputs */
+            box-sizing: border-box;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1abc9c; /* Button color */
+            border: none;
+            border-radius: 5px;
+            color: #ffffff; /* Button text color */
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .form-container button:hover {
+            background-color: #16a085; /* Darker button color on hover */
+        }
+        .error-message {
+            color: #ff4d4d; /* Red color for error messages */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Create New Exam</h2>
+    
+    <% if (errors && errors.length > 0) { %>
+        <div class="error-message">
+            <ul>
+                <% errors.forEach(error => { %>
+                    <li><%= error %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+
+    <form action="/submit_exam" method="POST">
+        <div>
+            <label for="title">Exam Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <div>
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+        </div>
+
+        <div>
+            <label for="duration">Duration (in minutes):</label>
+            <input type="number" id="duration" name="duration" min="1" required>
+        </div>
+
+        <div>
+            <label for="questions">Questions (separated by commas):</label>
+            <input type="text" id="questions" name="questions" required>
+        </div>
+
+        <button type="submit">Create Exam</button>
+    </form>
+</div>
+
+</body>
+</html>

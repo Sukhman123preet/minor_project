@@ -144,7 +144,7 @@ const examAttemptSchema = new mongoose.Schema({
     dateAttempted: { type: Date, default: Date.now },
     status: { 
         type: String, 
-        enum: ['stopped', 'completed'], // Valid statuses
+        enum: ['stopped', 'completed', 'not_attempted'], // Valid statuses
         default: 'not_attempted' 
     },
     attempt_no: { type: Number,  default:0 }

@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Educator Details Form</title>
     <style>
-        *{
-            margin: 0px;
-            padding: 0px;
+        * {
+            margin: 0;
+            padding: 0;
         }
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #2c3e50; /* Dark background */
-            color: #e0e0e0; /* Light text color */
+            background-color: #2c3e50;
+            color: #e0e0e0;
             margin: 0;
             padding: 15px;
             display: flex;
@@ -22,18 +22,16 @@
         }
 
         .form-container {
-            background-color: #10121a; /* Darker background for form container */
+            background-color: #10121a;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 500px;
-            color: #e0e0e0;
         }
 
         .form-container h2 {
             margin-bottom: 20px;
-            color: #e0e0e0;
             text-align: center;
             font-size: 24px;
         }
@@ -41,8 +39,8 @@
         .form-container label {
             display: block;
             margin-bottom: 5px;
+            font-size: 14px;
             color: #e0e0e0;
-            font-size: smaller;
         }
 
         .form-container input[type="text"],
@@ -52,55 +50,52 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
-            border: 1px solid #3b4e63; /* Subtle border color */
+            border: 1px solid #3b4e63;
             border-radius: 5px;
-            background-color: #2c3e50; /* Dark input background */
-            color: #e0e0e0; /* Light text color in inputs */
+            background-color: #2c3e50;
+            color: #e0e0e0;
             box-sizing: border-box;
+            transition: border-color 0.3s ease; /* Transition for border color */
         }
 
-        .form-container input[type="number"] {
-            -moz-appearance: textfield; /* For Firefox */
-            appearance: textfield; /* For other browsers */
-        }
-
-        .form-container input[type="number"]::-webkit-outer-spin-button,
-        .form-container input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none; /* Hides spin buttons in Chrome, Safari, and Opera */
-            margin: 0;
+        .form-container input[type="text"]:focus,
+        .form-container input[type="email"]:focus,
+        .form-container input[type="number"]:focus,
+        .form-container select:focus {
+            border-color: #1abc9c; /* Highlight on focus */
+            outline: none; /* Remove default outline */
         }
 
         .form-container button {
             width: 100%;
             padding: 10px;
-            background-color: #1abc9c; /* Button color */
+            background-color: #1abc9c;
             border: none;
             border-radius: 5px;
-            color: #ffffff; /* Button text color */
-            font-size: 13px;
+            color: #ffffff;
+            font-size: 15px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .form-container button:hover {
-            background-color: #16a085; /* Darker button color on hover */
+            background-color: #16a085;
         }
 
         .form-container img {
             max-width: 20%;
             max-height: 20%;
-            
-            object-fit: contain; /* Scales image while preserving aspect ratio */
+            object-fit: contain;
             display: block;
-             /* Center image and add margin at the bottom */
+            margin: 0 auto 20px; /* Center image and add margin at the bottom */
         }
 
         .field {
             margin-bottom: 15px;
             padding: 10px;
-            background-color: #2c3e50; /* Dark background for input containers */
+            background-color: #2c3e50;
             border-radius: 5px;
-            border: 1px solid #3b4e63; /* Subtle border color */
+            border: 1px solid #3b4e63;
         }
     </style>
 </head>
@@ -117,12 +112,12 @@
 
         <div class="field">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" placeholder="example@example.com" required>
         </div>
 
         <div class="field">
             <label for="subjectExpertise">Subject Expertise:</label>
-            <input type="text" id="subjectExpertise" name="subjectExpertise" required>
+            <input type="text" id="subjectExpertise" name="subjectExpertise" placeholder="Your subject expertise" required>
         </div>
 
         <div class="field">

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educator Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #05070e; /* Darker slate blue background */
+            color: #94a3b8; /* Softer text color */
+        }
+
+        nav {
+            background-color: #1e293b; /* Darker navy */
+            position: fixed;
+            height: 50px;
+            width: 100%;
+            top: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+        }
+
+        nav li {
+            height: 20px;
+        }
+
+        nav a {
+            height: 100%;
+            padding: 0 30px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            color: #e2e8f0; /* Light Gray */
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #38bdf8; /* Bright blue hover effect */
+        }
+
+        .logo {
+            margin-right: auto;
+            padding-left: 15px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 250px;
+            background-color: rgba(30, 41, 59, 0.95); /* Semi-transparent Dark Blue */
+            backdrop-filter: blur(12px);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out; /* Smooth transition */
+        }
+
+        .sidebar.show {
+            transform: translateX(0); /* Slide in */
+        }
+
+        .sidebar li {
+            padding-bottom: 15px;
+            width: 100%;
+        }
+
+        .sidebar a {
+            width: 100%;
+            color: #e2e8f0; /* Light Gray */
+            padding: 15px;
+            text-align: left;
+            display: block;
+        }
+
+        .menu-button {
+            display: none;
+        }
+
+        @media(max-width: 500px) {
+            .hideOnMobile {
+                display: none;
+            }
+
+            .menu-button {
+                display: block;
+            }
+        }
+
+        /* Main Content Layout */
+        main.profile-container {
+            margin-top: 50px;
+            padding: 5px;
+        }
+
+        /* Details and Graph Grid Layout */
+        .details-and-graph {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Educator Details Card */
+        .educator-details.card {
+            background-color: #1e293b; /* Darker navy */
+            border-radius: 1rem;
+            padding: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-header img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: #374151;
+            padding: 0.5rem;
+        }
+
+        .profile-header h1 {
+            font-size: 1.5rem;
+            color: #f1f5f9; /* Brighter white for headers */
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stats-card {
+            background-color: #334155; /* Lighter navy for cards */
+            border-radius: 0.75rem;
+            padding: 5px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-4px);
+            background-color: #02164b;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-card h3 {
+            color: #cbd5e1; /* Lighter gray for card headers */
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .stats-card img {
+            width: 40px;
+            height: 40px;
+            margin: 0.5rem auto;
+            filter: invert(1);
+        }
+
+        .stats-card .stats-value {
+            color: #f1f5f9; /* Brighter white for values */
+            font-size: 1rem;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        /* Graph Section */
+        .graph-section {
+            background-color: #1e293b; /* Darker navy */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .graph-section h2 {
+            color: #f1f5f9; /* Brighter white for headers */
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .graph-section canvas {
+            margin-left: 20px;
+            margin-right: 20px;
+            width: 70% !important;
+            height: 300px !important;
+            max-height: 300px;
+        }
+
+        /* Student Attempts Section */
+        .student-attempts {
+            background-color: #1e293b; /* Darker navy */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .student-attempts h2 {
+            color: #f1f5f9; /* Brighter white for headers */
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #334155; /* Lighter border */
+        }
+
+        th {
+            background-color: #334155; /* Lighter navy for table headers */
+            color: #cbd5e1; /* Lighter gray for header text */
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        th:first-child {
+            border-top-left-radius: 0.5rem;
+        }
+
+        th:last-child {
+            border-top-right-radius: 0.5rem;
+        }
+
+        td {
+            color: #f1f5f9; /* Brighter white for table content */
+        }
+
+        tr:hover td {
+            background-color: #475569; /* Slightly lighter on hover */
+        }
+
+        /* Additional Media Queries */
+        @media (max-width: 1024px) {
+            .details-and-graph {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+
+            .graph-section {
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .stats-card {
+                padding: 1rem;
+            }
+
+            .profile-header h1 {
+                font-size: 1.25rem;
+            }
+
+            .graph-section {
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" class="logo"><img src="https://img.icons8.com/?size=100&id=X7Ps4LtblU6u&format=png&color=000000" alt="Logo"></a></li>
+            <li><a href="#" class="menu-button" onclick="showSidebar()">☰</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <ul class="sidebar">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Manage Exams</a></li>
+        <li><a href="#">View Students</a></li>
+        <li><a href="#">Statistics</a></li>
+        <li><a href="#">Settings</a></li>
+    </ul>
+
+    <main class="profile-container">
+        <div class="educator-details card">
+            <div class="profile-header">
+                <img id="educatorImage" src="<%= educator.imageUrl %>" alt="Educator Profile">
+                <div>
+                    <h1 id="educatorName"><%= educator.name %></h1>
+                    <p id="educatorSubject"><%= educator.subject %></p>
+                </div>
+            </div>
+            <!-- Additional details and statistics -->
+        </div>
+    
+        <div class="dashboard-grid">
+            <% studentAttempts.forEach(attempt => { %>
+                <div class="stats-card">
+                    <img src="../../attempt_icon.png" alt="Attempt Icon">
+                    <h3>Test: <%= attempt.testTitle %></h3>
+                    <p class="stats-value">Attempts: <%= attempt.count %></p>
+                </div>
+            <% }); %>
+        </div>
+    
+        <div class="graph-section">
+            <h2>Performance Over Time</h2>
+            <canvas id="myChart"></canvas>
+        </div>
+    
+    </main>
+
+    <script>
+        
+        // Function to show sidebar
+        function showSidebar() {
+            document.querySelector('.sidebar').classList.add('show');
+        }
+
+        // Function to hide sidebar
+        function hideSidebar() {
+            document.querySelector('.sidebar').classList.remove('show');
+        }
+
+        // Fetch educator data
+        async function fetchEducatorData() {
+            const response = await fetch('http://localhost:3000/educator');
+            const educator = await response.json();
+            document.getElementById('educatorName').innerText = educator.name;
+            document.getElementById('educatorSubject').innerText = `Subject: ${educator.subject}`;
+            document.getElementById('educatorEmail').innerText = `Email: ${educator.email}`;
+        }
+
+        // Fetch recent attempts data
+        async function fetchRecentAttempts() {
+            const response = await fetch('http://localhost:3000/attempts');
+            const attempts = await response.json();
+            const attemptsTableBody = document.getElementById('attemptsTableBody');
+            attemptsTableBody.innerHTML = ''; // Clear existing rows
+
+            attempts.forEach(attempt => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${attempt.studentName}</td>
+                    <td>${attempt.examTitle}</td>
+                    <td>${new Date(attempt.date).toLocaleDateString()}</td>
+                    <td>${attempt.status}</td>
+                `;
+                attemptsTableBody.appendChild(row);
+            });
+        }
+
+        // Fetch statistics data for the chart
+        async function fetchStatistics() {
+            const response = await fetch('http://localhost:3000/statistics');
+            const stats = await response.json();
+            createExamStatisticsChart(stats.labels, stats.data);
+        }
+
+        // Create the exam statistics chart
+        function createExamStatisticsChart(labels, data) {
+            const ctx = document.getElementById('examStatisticsChart').getContext('2d');
+            const examStatisticsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Exam Attempts',
+                        data: data,
+                        backgroundColor: 'rgba(34, 197, 94, 0.5)',
+                        borderColor: 'rgba(22, 163, 74, 1)',
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e5e7eb',
+                            },
+                        },
+                    },
+                },
+            });
+        }
+
+        // Initialize dashboard
+        async function initializeDashboard() {
+            await fetchEducatorData();
+            await fetchRecentAttempts();
+            await fetchStatistics();
+        }
+
+        // Call the initialize function on page load
+        window.onload = initializeDashboard;
+    </script>
+</body>
+</html>
