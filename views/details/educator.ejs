@@ -104,10 +104,10 @@
 <div class="form-container">
     <img src="../../form.png" alt="Form Image">
     <h2>Educator Details</h2>
-    <form action="/submit-educator-details" method="POST">
+    <form action="/Educator/save_details" method="POST">
         <div class="field">
             <label for="educatorName">Educator Name:</label>
-            <input type="text" id="educatorName" name="educatorName" value="<%= user_name %>" readonly required>
+            <input type="text" id="educatorName" name="educatorName" value="<%=educatorName%>" readonly required>
         </div>
 
         <div class="field">

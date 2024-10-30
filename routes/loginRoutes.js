@@ -14,7 +14,7 @@ router.get('',(req, res) => {
     res.render('login.ejs');
 });
 
-router.get('/Student/:username', 
+router.post('/Student/:username', 
     passport.authenticate('Student-local', {
         failureRedirect: '/Login',
     }), 
@@ -34,7 +34,7 @@ router.get('/Student/:username',
 
 
 // Route for educator login
-router.get('/Educator/:username', 
+router.post('/Educator/:username', 
     passport.authenticate('Educator-local', {
         failureRedirect: '/Login',}),
     async (req, res) => {

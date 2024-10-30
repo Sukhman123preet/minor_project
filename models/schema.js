@@ -163,5 +163,4 @@ const ExamAttempt = mongoose.model('ExamAttempt', examAttemptSchema);
 
 
 
-
 module.exports = { connectMongoose, Educator, Student, EducatorDetails, StudentDetails, Exam, ExamAttempt };

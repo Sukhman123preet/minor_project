@@ -24,10 +24,28 @@ router.get('/profile/:username', isAuthenticated, async (req, res) => {
     }
 });
 
-// Route to display create exam page (GET)
-router.get('/createExam', isAuthenticated, (req, res) => {
-    res.render('create_exam.ejs');
+router.post('/save_details', async (req, res) => {
+    try {
+        // Create a new EducatorDetails document
+        const educatorDetails = new EducatorDetails({
+            educatorName: req.body.educatorName,
+            email: req.body.email,
+            subjectExpertise: req.body.subjectExpertise,
+            highestLevelOfEducation: req.body.highestLevelOfEducation,
+            experience: req.body.experience
+        });
+
+        // Save the document to the database
+        await educatorDetails.save();
+
+        // Redirect or send a response upon success
+         return res.render('create_exam.ejs', { user: req.body.educatorName });
+    } catch (error) {
+        console.error('Error saving educator details:', error);
+        res.status(500).send('Failed to save educator details');
+    }
 });
+
 
 // Route to handle exam creation (POST)
 router.post('/createExam', isAuthenticated, async (req, res) => {
@@ -62,13 +80,13 @@ router.get('/exams', isAuthenticated, async (req, res) => {
 });
 
 // Route to check details and handle requests for creating tests
-router.get('/check_details/:username', isAuthenticated, async (req, res) => {
+router.get('/check_details/:username', isAuthenticated, async (req, res) =>{
     try {
         const educatorName = req.params.username;
         const educator = await EducatorDetails.findOne({ educatorName });
 
         if (educator) {
-            return res.render('give_exam.ejs', { user: req.user });
+            return res.render('create_exam.ejs', { user: req.user });
         } else {
             return res.render('details/educator.ejs', { educatorName });
         }
