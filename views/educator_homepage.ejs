@@ -177,17 +177,13 @@
             <li><a href="/">Home</a></li>
             <li><a href="/educator/<%= user._id %>">Profile</a></li>
             <li><a href="/educator/create_exam">Create Exam</a></li>
-      <li><a href="/educator/edit_exam">Edit Exam</a></li>
-      <li><a href="/educator/exam_attempts">Exam Attempts</a></li>
             <li><a href="/logout">Log Out</a></li>
         </ul>
         <ul>
-            <li class="hideOnMobile"><a href="/">Home</a></li>
-            <li class="hideOnMobile"><a href="/educator/<%= user._id %>">Profile</a></li>
-            <li class="hideOnMobile"><a href="/educator/create_exam">Create Exam</a></li>
-            <li class="hideOnMobile"><a href="/educator/edit_exam">Edit Exam</a></li>
-            <li class="hideOnMobile"><a href="/educator/exam_attempts">Exam Attempts</a></li>
-            <li class="hideOnMobile"><a href="/logout">Log Out</a></li>
+            <li class="hideOnMobile"><a href="#">Home</a></li>
+            <li class="hideOnMobile"><a href="/Educator/<%= user._id %>">Profile</a></li>
+            <li class="hideOnMobile"><a href="/Educator/check_details/<%= user.username %>">Create Exam</a></li>
+            <li class="hideOnMobile"><a href="/Login">Log Out</a></li>
             <li class="menu-button" onclick="showSidebar()">
               <a href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
